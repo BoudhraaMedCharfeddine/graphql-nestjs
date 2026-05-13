@@ -1,0 +1,91 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
+input CreateTaskInput {
+  description: String
+  status: TaskStatus = PENDING
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  """Create a new task for the current authenticated user"""
+  createTask(createTaskInput: CreateTaskInput!): Task!
+
+  """Delete a task by ID (must belong to the current user)"""
+  deleteTask(id: ID!): Boolean!
+
+  """Login with email and password, returns a JWT token"""
+  login(loginInput: LoginInput!): AuthResponse!
+
+  """Register a new user and return a JWT token"""
+  register(registerInput: RegisterInput!): AuthResponse!
+
+  """Update an existing task (must belong to the current user)"""
+  updateTask(updateTaskInput: UpdateTaskInput!): Task!
+}
+
+type Query {
+  """Get the currently authenticated user profile"""
+  me: User!
+
+  """Get a single task by ID (must belong to the current user)"""
+  task(id: ID!): Task!
+
+  """Get all tasks belonging to the current authenticated user"""
+  tasks: [Task!]!
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
+type Task {
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  status: TaskStatus!
+  title: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+"""The status of a task"""
+enum TaskStatus {
+  DONE
+  IN_PROGRESS
+  PENDING
+}
+
+input UpdateTaskInput {
+  description: String
+  id: ID!
+  status: TaskStatus
+  title: String
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  tasks: [Task!]
+  username: String!
+}
