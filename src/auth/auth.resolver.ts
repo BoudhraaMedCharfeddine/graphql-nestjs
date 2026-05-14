@@ -12,17 +12,17 @@ export class AuthResolver {
     description: 'Register a new user and return a JWT token',
   })
   async register(
-    @Args('registerInput') registerInput: RegisterInput,
+    @Args('input') input: RegisterInput,
   ): Promise<AuthResponse> {
-    return this.authService.register(registerInput);
+    return this.authService.register(input);
   }
 
   @Mutation(() => AuthResponse, {
     description: 'Login with email and password, returns a JWT token',
   })
   async login(
-    @Args('loginInput') loginInput: LoginInput,
+    @Args('input') input: LoginInput,
   ): Promise<AuthResponse> {
-    return this.authService.login(loginInput);
+    return this.authService.login(input);
   }
 }

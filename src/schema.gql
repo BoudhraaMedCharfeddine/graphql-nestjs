@@ -25,19 +25,19 @@ input LoginInput {
 
 type Mutation {
   """Create a new task for the current authenticated user"""
-  createTask(createTaskInput: CreateTaskInput!): Task!
+  createTask(input: CreateTaskInput!): Task!
 
   """Delete a task by ID (must belong to the current user)"""
   deleteTask(id: ID!): Boolean!
 
   """Login with email and password, returns a JWT token"""
-  login(loginInput: LoginInput!): AuthResponse!
+  login(input: LoginInput!): AuthResponse!
 
   """Register a new user and return a JWT token"""
-  register(registerInput: RegisterInput!): AuthResponse!
+  register(input: RegisterInput!): AuthResponse!
 
   """Update an existing task (must belong to the current user)"""
-  updateTask(updateTaskInput: UpdateTaskInput!): Task!
+  updateTask(input: UpdateTaskInput!): Task!
 }
 
 type Query {

@@ -46,20 +46,20 @@ export class TasksResolver {
     description: 'Create a new task for the current authenticated user',
   })
   async createTask(
-    @Args('createTaskInput') createTaskInput: CreateTaskInput,
+    @Args('input') input: CreateTaskInput,
     @CurrentUser() user: User,
   ): Promise<Task> {
-    return this.tasksService.create(createTaskInput, user);
+    return this.tasksService.create(input, user);
   }
 
   @Mutation(() => Task, {
     description: 'Update an existing task (must belong to the current user)',
   })
   async updateTask(
-    @Args('updateTaskInput') updateTaskInput: UpdateTaskInput,
+    @Args('input') input: UpdateTaskInput,
     @CurrentUser() user: User,
   ): Promise<Task> {
-    return this.tasksService.update(updateTaskInput, user.id);
+    return this.tasksService.update(input, user.id);
   }
 
   @Mutation(() => Boolean, {
